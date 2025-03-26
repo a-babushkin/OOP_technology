@@ -1,11 +1,12 @@
 import json
 import os
+from typing import Any
 
 from src.category import Category
 from src.product import Product
 
 
-def read_json_file(path_to_file: str) -> dict:
+def read_json_file(path_to_file: str) -> Any:
     """Принимает на вход путь до JSON-файла и возвращает список словарей."""
     full_path = os.path.abspath(path_to_file)
     try:
@@ -22,9 +23,9 @@ def create_object_from_json(file_content: list[dict]) -> list:
     categories = []
     for category in file_content:
         products = []
-        for product in category['products']:
+        for product in category["products"]:
             products.append(Product(**product))
-        category['products'] = products
+        category["products"] = products
         categories.append(Category(**category))
     return categories
 
