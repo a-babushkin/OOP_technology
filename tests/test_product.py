@@ -11,6 +11,13 @@ def test_init(product_fixture: Any) -> None:
     assert product_fixture.quantity == 5
 
 
+def test_product_str(product_fixture: Any) -> None:
+    assert str(product_fixture) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
+
+def test_product__add__(product_fixture: Any, product_fixture_other: Any) -> None:
+    assert product_fixture + product_fixture_other == 2580000.0
+
+
 def test_product_create() -> None:
     product = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
     assert product.name == "Iphone 15"

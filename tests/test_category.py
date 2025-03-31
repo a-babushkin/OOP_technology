@@ -1,5 +1,7 @@
 from typing import Any
 
+import pytest
+
 
 def test_init(category1_fixture: Any, category2_fixture: Any) -> None:
     assert category1_fixture.name == "Смартфоны"
@@ -15,6 +17,10 @@ def test_init(category1_fixture: Any, category2_fixture: Any) -> None:
     assert category2_fixture.product_count == 3
 
 
+def test_category_str(category1_fixture: Any) -> None:
+    assert str(category1_fixture) == "Смартфоны, количество продуктов: 2 шт."
+
+
 def test_category_products_property(category1_fixture: Any) -> None:
     assert category1_fixture.products == (
         "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт.\n" "Iphone 15, 210000.0 руб. Остаток: 8 шт.\n"
@@ -28,6 +34,16 @@ def test_category_products_setter(category1_fixture: Any, product_fixture: Any) 
 
 
 def test_category_add_product(category1_fixture: Any, product_fixture: Any) -> None:
-    assert category1_fixture.product_count == 10
+    assert category1_fixture.product_count == 12
     category1_fixture.add_product(product_fixture)
-    assert category1_fixture.product_count == 11
+    assert category1_fixture.product_count == 13
+
+
+def test_product_iterator(product_iterator_fixture):
+    iter(product_iterator_fixture)
+    assert product_iterator_fixture.index == 0
+    assert str(next(product_iterator_fixture)) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
+    assert str(next(product_iterator_fixture)) == "Iphone 15, 210000.0 руб. Остаток: 8 шт."
+
+    with pytest.raises(StopIteration):
+        next(product_iterator_fixture)
