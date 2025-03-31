@@ -39,7 +39,7 @@ def test_category_add_product(category1_fixture: Any, product_fixture: Any) -> N
     assert category1_fixture.product_count == 13
 
 
-def test_product_iterator(product_iterator_fixture):
+def test_product_iterator(product_iterator_fixture: Any) -> None:
     iter(product_iterator_fixture)
     assert product_iterator_fixture.index == 0
     assert str(next(product_iterator_fixture)) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."

@@ -39,5 +39,5 @@ def category2_fixture() -> Any:
 
 
 @pytest.fixture
-def product_iterator_fixture(category1_fixture):
+def product_iterator_fixture(category1_fixture: Any) -> Any:
     return ProductIterator(category1_fixture)

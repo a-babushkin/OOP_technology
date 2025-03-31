@@ -14,6 +14,7 @@ def test_init(product_fixture: Any) -> None:
 def test_product_str(product_fixture: Any) -> None:
     assert str(product_fixture) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
 
+
 def test_product__add__(product_fixture: Any, product_fixture_other: Any) -> None:
     assert product_fixture + product_fixture_other == 2580000.0
 

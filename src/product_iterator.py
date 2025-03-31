@@ -1,18 +1,17 @@
 from src.category import Category
-from src.product import Product
 
 
 class ProductIterator:
 
-    def __init__(self, category_obj):
+    def __init__(self, category_obj: Category):
         self.category = category_obj
         self.index = 0
 
-    def __iter__(self):
+    def __iter__(self) -> object:
         self.index = 0
         return self
 
-    def __next__(self):
+    def __next__(self) -> object:
         if self.index < len(self.category.list_of_products):
             iter_product = self.category.list_of_products[self.index]
             self.index += 1
