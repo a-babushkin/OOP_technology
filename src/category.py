@@ -20,7 +20,7 @@ class Category:
     def __str__(self) -> str:
         return f"{self.name}, количество продуктов: {len(self.list_of_products)} шт."
 
-    def add_product(self, product_obj: Product|str) -> None:
+    def add_product(self, product_obj: Product | str) -> None:
         self.__products.append(product_obj)
         Category.product_count += 1
 
