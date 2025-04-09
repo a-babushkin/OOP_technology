@@ -47,3 +47,18 @@ def test_product_iterator(product_iterator_fixture: Any) -> None:
 
     with pytest.raises(StopIteration):
         next(product_iterator_fixture)
+
+
+def test_category_products_setter_fail(category1_fixture: Any) -> None:
+    with pytest.raises(ValueError):
+        category1_fixture.products = 1
+
+
+def test_category_products_setter_smartphone(category1_fixture: Any, product_fixture_smartphone1: Any) -> None:
+    category1_fixture.products = product_fixture_smartphone1
+    assert category1_fixture.list_of_products[-1].name == "Xiaomi Redmi Note 11"
+
+
+def test_category_products_setter_lawn_grass(category1_fixture: Any, product_fixture_lawn_grass1: Any) -> None:
+    category1_fixture.products = product_fixture_lawn_grass1
+    assert category1_fixture.list_of_products[-1].name == "Газонная трава"
