@@ -4,6 +4,7 @@ import pytest
 
 from src.category import Category
 from src.lawn_grass import LawnGrass
+from src.order import Order
 from src.product import Product
 from src.product_iterator import ProductIterator
 from src.smartphone import Smartphone
@@ -63,3 +64,13 @@ def product_fixture_lawn_grass1() -> Any:
 @pytest.fixture
 def product_fixture_lawn_grass2() -> Any:
     return LawnGrass("Газонная трава 2", "Выносливая трава", 450.0, 15, "США", "5 дней", "Темно-зеленый")
+
+
+@pytest.fixture
+def order_fixture1(product_fixture) -> Any:
+    return Order('426/25', '2025-03-09', 'Заказ с базы', product_fixture)
+
+
+@pytest.fixture
+def order_fixture2(product_fixture_other) -> Any:
+    return Order('576/25', '2025-04-17', 'Дополнительный заказ с базы', product_fixture_other)
