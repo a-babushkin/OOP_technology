@@ -67,10 +67,10 @@ def product_fixture_lawn_grass2() -> Any:
 
 
 @pytest.fixture
-def order_fixture1(product_fixture) -> Any:
-    return Order('426/25', '2025-03-09', 'Заказ с базы', product_fixture)
+def order_fixture1(product_fixture: Any) -> Any:
+    return Order("426/25", "2025-03-09", "Заказ с базы", product_fixture)
 
 
 @pytest.fixture
-def order_fixture2(product_fixture_other) -> Any:
-    return Order('576/25', '2025-04-17', 'Дополнительный заказ с базы', product_fixture_other)
+def order_fixture2(product_fixture_other: Any) -> Any:
+    return Order("576/25", "2025-04-17", "Дополнительный заказ с базы", product_fixture_other)

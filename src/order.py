@@ -22,16 +22,20 @@ class Order(BaseCatOrder):
         self.__product = product_obj
 
     def __str__(self) -> str:
-        return f"Заказ №{self.order_number} от {self.order_date}\n      {self.__product.name}, в кол-ве = {self.__product.quantity} на сумму {self.__product.quantity * self.__product.price}"
+        return (
+            f"Заказ №{self.order_number} от {self.order_date}\n      {self.__product.name}, "
+            f"в кол-ве = {self.__product.quantity} на сумму {self.__product.quantity * self.__product.price}"
+        )
 
     @property
     def product(self) -> str:
-        return f"Товар - {self.__product.name}, в кол-ве = {self.__product.quantity} на сумму {self.__product.quantity * self.__product.price}"
+        return (
+            f"Товар - {self.__product.name}, в кол-ве = {self.__product.quantity} "
+            f"на сумму {self.__product.quantity * self.__product.price}"
+        )
 
     @product.setter
     def product(self, product_obj: Product) -> None:
         if not isinstance(product_obj, Product):
             raise ValueError("Добавлять можно только объекты класса Product.")
         self.__product = product_obj
-
-

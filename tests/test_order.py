@@ -13,20 +13,19 @@ def test_init(order_fixture1: Any, order_fixture2: Any) -> None:
 
 
 def test_order_str(order_fixture1: Any) -> None:
-    assert str(order_fixture1) == "Заказ №426/25 от 2025-03-09\n      Samsung Galaxy C23 Ultra, в кол-ве = 5 на сумму 900000.0"
+    assert str(order_fixture1) == (
+        "Заказ №426/25 от 2025-03-09\n      Samsung Galaxy C23 Ultra," " в кол-ве = 5 на сумму 900000.0"
+    )
 
 
 def test_order_product_property(order_fixture1: Any) -> None:
-    assert order_fixture1.product == (
-        "Товар - Samsung Galaxy C23 Ultra, в кол-ве = 5 на сумму 900000.0"
-    )
+    assert order_fixture1.product == ("Товар - Samsung Galaxy C23 Ultra, в кол-ве = 5 на сумму 900000.0")
 
 
 def test_order_product_setter(order_fixture1: Any, product_fixture_other: Any) -> None:
     assert order_fixture1.product == "Товар - Samsung Galaxy C23 Ultra, в кол-ве = 5 на сумму 900000.0"
     order_fixture1.product = product_fixture_other
     assert order_fixture1.product == "Товар - Iphone 15, в кол-ве = 8 на сумму 1680000.0"
-
 
 
 def test_order_add_product(order_fixture1: Any, product_fixture_other: Any) -> None:
