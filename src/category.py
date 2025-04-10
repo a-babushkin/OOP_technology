@@ -1,7 +1,8 @@
+from src.base_cat_order import BaseCatOrder
 from src.product import Product
 
 
-class Category:
+class Category(BaseCatOrder):
     name: str
     description: str
     # products: list[object]
@@ -34,7 +35,7 @@ class Category:
     @products.setter
     def products(self, product_obj: Product) -> None:
         if not isinstance(product_obj, Product):
-            raise ValueError("Добавлять моно только объекты класса Product.")
+            raise ValueError("Добавлять можно только объекты класса Product.")
         self.__products.append(product_obj)
         Category.product_count += 1
 
