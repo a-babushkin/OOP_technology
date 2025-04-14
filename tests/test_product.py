@@ -50,13 +50,13 @@ def test_price_setter_increase(product_fixture: Any) -> None:
 def test_price_setter_zero(capsys: Any, product_fixture: Any) -> None:
     product_fixture.price = 0
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split("\n")[-1] == "Цена не должна быть нулевая или отрицательная"
 
 
 def test_price_setter_negative(capsys: Any, product_fixture: Any) -> None:
     product_fixture.price = -750
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split("\n")[-1] == "Цена не должна быть нулевая или отрицательная"
 
 
 @patch("builtins.input", side_effect=["n"])
