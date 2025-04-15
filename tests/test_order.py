@@ -2,6 +2,8 @@ from typing import Any
 
 import pytest
 
+from src.product import Product
+
 
 def test_init(order_fixture1: Any, order_fixture2: Any) -> None:
     assert order_fixture1.order_number == "426/25"
@@ -47,3 +49,20 @@ def test_order_product_setter_smartphone(order_fixture1: Any, product_fixture_sm
 def test_order_products_setter_lawn_grass(order_fixture1: Any, product_fixture_lawn_grass1: Any) -> None:
     order_fixture1.product = product_fixture_lawn_grass1
     assert order_fixture1.product == "Товар - Газонная трава, в кол-ве = 20 на сумму 10000.0"
+
+
+def test_custom_exception_success(capsys, order_fixture1: Any) -> None:
+    product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
+    order_fixture1.product = product1
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Товар добавлен успешно"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара в Заказ завершена."
+
+
+def test_custom_exception_empty_quantity(capsys, order_fixture1: Any) -> None:
+    product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
+    product1.quantity = 0
+    order_fixture1.product = product1
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Укажите правильное кол-во!"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара в Заказ завершена."

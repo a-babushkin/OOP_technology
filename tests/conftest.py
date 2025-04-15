@@ -2,6 +2,8 @@ from typing import Any
 
 import pytest
 
+from src.base_cat_order import BaseCatOrder
+from src.base_product import BaseProduct
 from src.category import Category
 from src.lawn_grass import LawnGrass
 from src.order import Order
@@ -74,3 +76,29 @@ def order_fixture1(product_fixture: Any) -> Any:
 @pytest.fixture
 def order_fixture2(product_fixture_other: Any) -> Any:
     return Order("576/25", "2025-04-17", "Дополнительный заказ с базы", product_fixture_other)
+
+
+class TestCatOrder(BaseCatOrder):
+    def __init__(self):
+        self.products = []
+
+    def add_product(self, *args: Any, **kwargs: Any) -> None:
+        self.products.append((args, kwargs))
+
+
+class TestProduct(BaseProduct):
+    def __init__(self):
+        self.product = object
+
+    def new_product(self, *args: Any, **kwargs: Any) -> None:
+        self.product()
+
+
+@pytest.fixture
+def category_empty_fixture() -> Any:
+    return Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        [],
+    )
+
