@@ -1,7 +1,6 @@
 from typing import Any
 
 import pytest
-from pyexpat.errors import messages
 
 from src.product import Product
 
@@ -72,7 +71,7 @@ def test_middle_price(category1_fixture: Any, category_empty_fixture: Any) -> No
     assert category_empty_fixture.middle_price() == 0
 
 
-def test_custom_exception_success(capsys, category1_fixture: Any) -> None:
+def test_custom_exception_success(capsys: Any, category1_fixture: Any) -> None:
     assert len(category1_fixture.list_of_products) == 2
     product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
     category1_fixture.products = product1
@@ -82,7 +81,7 @@ def test_custom_exception_success(capsys, category1_fixture: Any) -> None:
     assert len(category1_fixture.list_of_products) == 3
 
 
-def test_custom_exception_empty_quantity(capsys, category_empty_fixture: Any) -> None:
+def test_custom_exception_empty_quantity(capsys: Any, category_empty_fixture: Any) -> None:
     assert len(category_empty_fixture.list_of_products) == 0
     product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
     product1.quantity = 0

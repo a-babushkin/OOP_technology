@@ -51,7 +51,7 @@ def test_order_products_setter_lawn_grass(order_fixture1: Any, product_fixture_l
     assert order_fixture1.product == "Товар - Газонная трава, в кол-ве = 20 на сумму 10000.0"
 
 
-def test_custom_exception_success(capsys, order_fixture1: Any) -> None:
+def test_custom_exception_success(capsys: Any, order_fixture1: Any) -> None:
     product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
     order_fixture1.product = product1
     message = capsys.readouterr()
@@ -59,7 +59,7 @@ def test_custom_exception_success(capsys, order_fixture1: Any) -> None:
     assert message.out.strip().split("\n")[-1] == "Обработка добавления товара в Заказ завершена."
 
 
-def test_custom_exception_empty_quantity(capsys, order_fixture1: Any) -> None:
+def test_custom_exception_empty_quantity(capsys: Any, order_fixture1: Any) -> None:
     product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
     product1.quantity = 0
     order_fixture1.product = product1
