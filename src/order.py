@@ -1,6 +1,6 @@
 from src.base_cat_order import BaseCatOrder
-from src.product import Product
 from src.exception import ZeroQuantityProduct
+from src.product import Product
 
 
 class Order(BaseCatOrder):
@@ -19,7 +19,7 @@ class Order(BaseCatOrder):
 
         Order.order_count += 1
 
-    def add_product(self, product_obj: Product | str) -> None:
+    def add_product(self, product_obj: Product | None) -> None:
         self.__product = product_obj
 
     def __str__(self) -> str:

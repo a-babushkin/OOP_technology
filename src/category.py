@@ -1,6 +1,6 @@
 from src.base_cat_order import BaseCatOrder
-from src.product import Product
 from src.exception import ZeroQuantityProduct
+from src.product import Product
 
 
 class Category(BaseCatOrder):
