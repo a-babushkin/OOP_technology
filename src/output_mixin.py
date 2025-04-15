@@ -1,4 +1,6 @@
-class OutputMixin:
+from typing import Protocol
+
+class OutputMixin(Protocol):
     def __init__(self) -> None:
         print(repr(self))
 
