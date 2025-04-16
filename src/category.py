@@ -1,4 +1,5 @@
 from src.base_cat_order import BaseCatOrder
+from src.exception import ZeroQuantityProduct
 from src.product import Product
 
 
@@ -34,11 +35,27 @@ class Category(BaseCatOrder):
 
     @products.setter
     def products(self, product_obj: Product) -> None:
-        if not isinstance(product_obj, Product):
+        if isinstance(product_obj, Product):
+            try:
+                if product_obj.quantity < 1:
+                    raise ZeroQuantityProduct("Укажите правильное кол-во!")
+            except ZeroQuantityProduct as e:
+                print(str(e))
+            else:
+                self.__products.append(product_obj)
+                Category.product_count += 1
+                print("Товар добавлен успешно")
+            finally:
+                print("Обработка добавления товара в Категорию завершена.")
+        else:
             raise ValueError("Добавлять можно только объекты класса Product.")
-        self.__products.append(product_obj)
-        Category.product_count += 1
 
     @property
     def list_of_products(self) -> list[object]:
         return self.__products
+
+    def middle_price(self) -> float:
+        try:
+            return round(sum(product.price for product in self.__products) / len(self.__products), 2)
+        except ZeroDivisionError:
+            return 0

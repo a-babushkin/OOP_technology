@@ -2,6 +2,8 @@ from typing import Any
 
 import pytest
 
+from src.product import Product
+
 
 def test_init(category1_fixture: Any, category2_fixture: Any) -> None:
     assert category1_fixture.name == "Смартфоны"
@@ -62,3 +64,29 @@ def test_category_products_setter_smartphone(category1_fixture: Any, product_fix
 def test_category_products_setter_lawn_grass(category1_fixture: Any, product_fixture_lawn_grass1: Any) -> None:
     category1_fixture.products = product_fixture_lawn_grass1
     assert category1_fixture.list_of_products[-1].name == "Газонная трава"
+
+
+def test_middle_price(category1_fixture: Any, category_empty_fixture: Any) -> None:
+    assert category1_fixture.middle_price() == 195000.0
+    assert category_empty_fixture.middle_price() == 0
+
+
+def test_custom_exception_success(capsys: Any, category1_fixture: Any) -> None:
+    assert len(category1_fixture.list_of_products) == 2
+    product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
+    category1_fixture.products = product1
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Товар добавлен успешно"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара в Категорию завершена."
+    assert len(category1_fixture.list_of_products) == 3
+
+
+def test_custom_exception_empty_quantity(capsys: Any, category_empty_fixture: Any) -> None:
+    assert len(category_empty_fixture.list_of_products) == 0
+    product1 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 11)
+    product1.quantity = 0
+    category_empty_fixture.products = product1
+    message = capsys.readouterr()
+    assert message.out.strip().split("\n")[-2] == "Укажите правильное кол-во!"
+    assert message.out.strip().split("\n")[-1] == "Обработка добавления товара в Категорию завершена."
+    assert len(category_empty_fixture.list_of_products) == 0

@@ -1,6 +1,8 @@
 from typing import Any
 from unittest.mock import patch
 
+import pytest
+
 from src.product import Product
 
 
@@ -63,3 +65,9 @@ def test_price_setter_negative(capsys: Any, product_fixture: Any) -> None:
 def test_price_setter_invalid(capsys: Any, product_fixture: Any) -> None:
     product_fixture.price = 800
     assert product_fixture.price, 180000.0
+
+
+def test_wrong_product_quantity() -> None:
+    with pytest.raises(ValueError) as exc_info:
+        Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
+        assert exc_info.value == "Товар с количеством меньше единицы не может быть добавлен"

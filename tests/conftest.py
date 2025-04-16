@@ -74,3 +74,12 @@ def order_fixture1(product_fixture: Any) -> Any:
 @pytest.fixture
 def order_fixture2(product_fixture_other: Any) -> Any:
     return Order("576/25", "2025-04-17", "Дополнительный заказ с базы", product_fixture_other)
+
+
+@pytest.fixture
+def category_empty_fixture() -> Any:
+    return Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        [],
+    )
